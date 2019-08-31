@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Search;
 
+use App\Assert\Assertion;
+
 class SearchResult
 {
     private $title;
@@ -10,7 +12,9 @@ class SearchResult
 
     public function __construct(string $title, string $url)
     {
-        // @todo validate params
+        Assertion::notEmpty($title);
+        Assertion::url($url);
+
         $this->title = $title;
         $this->url = $url;
     }
