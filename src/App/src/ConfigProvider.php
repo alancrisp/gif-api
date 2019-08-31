@@ -11,6 +11,7 @@ class ConfigProvider
     public function __invoke(): array
     {
         return [
+            ConfigAbstractFactory::class => $this->getConfigAbstractFactoryServices(),
             'dependencies' => $this->getDependencies(),
         ];
     }
@@ -22,6 +23,12 @@ class ConfigProvider
                 Handler\IndexHandler::class => InvokableFactory::class,
                 Search\StaticSearchClient::class => Search\StaticSearchClientFactory::class,
             ],
+        ];
+    }
+
+    private function getConfigAbstractFactoryServices(): array
+    {
+        return [
         ];
     }
 }
