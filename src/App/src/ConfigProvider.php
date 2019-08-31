@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App;
 
 use Zend\ServiceManager\AbstractFactory\ConfigAbstractFactory;
+use Zend\ServiceManager\Factory\InvokableFactory;
 
 class ConfigProvider
 {
@@ -18,7 +19,8 @@ class ConfigProvider
     {
         return [
             'factories' => [
-                StaticSearchClient::class => StaticSearchClientFactory::class,
+                Handler\IndexHandler::class => InvokableFactory::class,
+                Search\StaticSearchClient::class => Search\StaticSearchClientFactory::class,
             ],
         ];
     }
