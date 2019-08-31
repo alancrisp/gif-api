@@ -29,6 +29,9 @@ class ConfigProvider
     private function getConfigAbstractFactoryServices(): array
     {
         return [
+            Handler\SearchHandler::class => [
+                Search\StaticSearchClient::class,
+            ],
         ];
     }
 }

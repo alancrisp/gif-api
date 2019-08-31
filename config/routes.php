@@ -19,6 +19,7 @@ use Zend\Expressive\MiddlewareFactory;
  *
  * $app->route('/contact', App\Handler\ContactHandler::class, ['GET', 'POST', ...], 'contact');
  */
-return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
+return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->get('/', App\Handler\IndexHandler::class, 'index');
+    $app->get('/search', App\Handler\SearchHandler::class, 'search');
 };
