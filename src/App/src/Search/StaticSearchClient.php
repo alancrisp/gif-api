@@ -13,36 +13,17 @@ class StaticSearchClient implements SearchClient
     /**
      * @var array Canned responses
      */
-    private $gifs = [
-        'ceiling' => [
-            'title' => 'Ceiling Cat',
-            'file' => 'ceilingcat.gif',
-        ],
-        'grumpy' => [
-            'title' => 'Grumpy Cat',
-            'file' => 'grumpycat.gif',
-        ],
-        'keyboard' => [
-            'title' => 'Keyboard Cat',
-            'file' => 'keyboardcat.gif',
-        ],
-        'nyan' => [
-            'title' => 'Nyan Cat',
-            'file' => 'nyancat.gif',
-        ],
-        'takeoff' => [
-            'title' => 'Take-off',
-            'file' => 'takeoff.gif',
-        ],
-    ];
+    private $gifs;
 
-    public function __construct(string $baseUrl)
+    public function __construct(string $baseUrl, array $gifs)
     {
         $this->baseUrl = $baseUrl;
+        $this->gifs = $gifs;
     }
 
     public function search(string $query): SearchResult
     {
+        // Normalise search term
         $term = strtolower($query);
         if (!isset($this->gifs[$term])) {
             throw new \Exception('no result'); // @todo

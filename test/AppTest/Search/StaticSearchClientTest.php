@@ -13,7 +13,7 @@ class StaticSearchClientTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->client = new StaticSearchClient('gifs.com');
+        $this->client = new StaticSearchClient('gifs.com', $this->getGifs());
     }
 
     public function testSearchesGifs(): void
@@ -27,5 +27,15 @@ class StaticSearchClientTest extends TestCase
     {
         $result = $this->client->random();
         $this->assertInstanceOf(SearchResult::class, $result);
+    }
+
+    private function getGifs(): array
+    {
+        return [
+            'keyboard' => [
+                'title' => 'Keyboard Cat',
+                'file' => 'keyboardcat.gif',
+            ],
+        ];
     }
 }
