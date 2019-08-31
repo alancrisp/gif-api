@@ -10,7 +10,7 @@ class StaticSearchClientFactory
     public function __invoke(ContainerInterface $container): StaticSearchClient
     {
         // @todo get from config
-        $baseUrl = 'https://img.allthegifs.com';
+        $baseUrl = 'img.allthegifs.com';
         $gifs = $this->getGifs();
 
         return new StaticSearchClient($baseUrl, $gifs);
