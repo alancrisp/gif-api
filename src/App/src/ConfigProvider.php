@@ -21,6 +21,7 @@ class ConfigProvider
         return [
             'factories' => [
                 Handler\IndexHandler::class => InvokableFactory::class,
+                Middleware\ApiKeyMiddleware::class => InvokableFactory::class,
                 Search\StaticSearchClient::class => Search\StaticSearchClientFactory::class,
             ],
         ];

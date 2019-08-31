@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Middleware\ApiKeyMiddleware;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
 use Zend\Expressive\Handler\NotFoundHandler;
@@ -66,7 +67,8 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - route-based validation
     // - etc.
 
-    // @todo API key validation middleware
+    // Validate the API key header
+    $app->pipe(ApiKeyMiddleware::class);
 
     // Register the dispatch middleware in the middleware pipeline
     $app->pipe(DispatchMiddleware::class);
