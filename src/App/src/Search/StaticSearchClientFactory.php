@@ -3,17 +3,22 @@ declare(strict_types=1);
 
 namespace App\Search;
 
+use Exception;
 use Psr\Container\ContainerInterface;
 
 class StaticSearchClientFactory
 {
     public function __invoke(ContainerInterface $container): StaticSearchClient
     {
-        // @todo get from config
-        $baseUrl = 'img.allthegifs.com';
-        $gifs = $this->getGifs();
+        $config = $container->get('config');
+        if (!isset($config['urls']['base'])) {
+            throw new Exception('Base URL is not configured');
+        }
 
-        return new StaticSearchClient($baseUrl, $gifs);
+        return new StaticSearchClient(
+            $config['urls']['base'],
+            $this->getGifs()
+        );
     }
 
     private function getGifs(): array
