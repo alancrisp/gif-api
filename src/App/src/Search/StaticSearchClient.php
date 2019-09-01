@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Search;
 
+use Exception;
+
 class StaticSearchClient implements SearchClient
 {
     /**
@@ -26,7 +28,7 @@ class StaticSearchClient implements SearchClient
         // Normalise search term
         $term = strtolower($query);
         if (!isset($this->gifs[$term])) {
-            throw new \Exception('no result'); // @todo
+            throw new Exception(sprintf('No result found matching search term \'%s\'', $query));
         }
 
         $result = $this->gifs[$term];

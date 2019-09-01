@@ -5,6 +5,7 @@ namespace AppTest\Search;
 
 use App\Search\SearchResult;
 use App\Search\StaticSearchClient;
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 class StaticSearchClientTest extends TestCase
@@ -14,6 +15,13 @@ class StaticSearchClientTest extends TestCase
     protected function setUp(): void
     {
         $this->client = new StaticSearchClient('gifs.com', $this->getGifs());
+    }
+
+    public function testThrowsExceptionWhenNoSearchResult(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('No result found matching search term \'cool dog\'');
+        $this->client->search('cool dog');
     }
 
     public function testSearchesGifs(): void
