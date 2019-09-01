@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AppTest\Search;
 
+use App\Assert\Assertion;
 use App\Search\SearchResult;
 use App\Search\StaticSearchClient;
 use Exception;
@@ -14,6 +15,7 @@ class StaticSearchClientTest extends TestCase
     public function testValidatesBaseUrl(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionCode(Assertion::INVALID_NOT_BLANK);
         $this->createClient('');
     }
 
