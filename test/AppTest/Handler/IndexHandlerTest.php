@@ -5,17 +5,42 @@ namespace AppTest\Handler;
 
 use App\Handler\IndexHandler;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
+use Zend\Expressive\Helper\UrlHelper;
 
 class IndexHandlerTest extends TestCase
 {
+    /**
+     * @var IndexHandler
+     */
+    private $handler;
+
+    /**
+     * @var UrlHelper
+     */
+    private $urlHelper;
+
+    protected function setUp(): void
+    {
+        $this->urlHelper = $this->prophesize(UrlHelper::class);
+        $this->handler = new IndexHandler($this->urlHelper->reveal());
+    }
+
     public function testProvidesIndex(): void
     {
-        $handler = new IndexHandler();
+        $this->urlHelper->generate('search', Argument::type('array'))->willReturn('/search/{term}');
+        $expected = [
+            'endpoints' => [
+                'search' => '/search/{term}',
+            ],
+        ];
+
         $request = $this->prophesize(ServerRequestInterface::class);
-        $response = $handler->handle($request->reveal());
+        $response = $this->handler->handle($request->reveal());
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals($expected, $response->getPayload());
     }
 }

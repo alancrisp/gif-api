@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use Zend\Expressive\Helper\UrlHelper;
 use Zend\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -20,7 +21,6 @@ class ConfigProvider
     {
         return [
             'factories' => [
-                Handler\IndexHandler::class => InvokableFactory::class,
                 Middleware\ApiKeyMiddleware::class => InvokableFactory::class,
                 Search\StaticSearchClient::class => Search\StaticSearchClientFactory::class,
             ],
@@ -30,6 +30,9 @@ class ConfigProvider
     private function getConfigAbstractFactoryServices(): array
     {
         return [
+            Handler\IndexHandler::class => [
+                UrlHelper::class,
+            ],
             Handler\SearchHandler::class => [
                 Search\StaticSearchClient::class,
             ],
