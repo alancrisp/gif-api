@@ -19,10 +19,31 @@ class StaticSearchClientTest extends TestCase
         $this->createClient('');
     }
 
-    public function testValidatesGifsConfig(): void
+    /**
+     * @dataProvider invalidGifConfigs
+     */
+    public function testValidatesGifsConfig(array $gifs): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->createClient('gifs.com', []);
+        $this->createClient('gifs.com', $gifs);
+    }
+
+    public function invalidGifConfigs(): array
+    {
+        return [
+            [
+                // Empty gif config
+                [],
+            ],
+            [
+                // Missing title key
+                ['file' => 'notitle.gif'],
+            ],
+            [
+                // Missing file key
+                ['title' => 'nofile'],
+            ],
+        ];
     }
 
     public function testThrowsExceptionWhenNoSearchResult(): void

@@ -22,6 +22,8 @@ class StaticSearchClient implements SearchClient
     {
         Assertion::notBlank($baseUrl);
         Assertion::notEmpty($gifs);
+        Assertion::allKeyIsset($gifs, 'title');
+        Assertion::allKeyIsset($gifs, 'file');
 
         $this->baseUrl = $baseUrl;
         $this->gifs = $gifs;
