@@ -33,6 +33,9 @@ class ConfigProvider
             Handler\IndexHandler::class => [
                 UrlHelper::class,
             ],
+            Handler\RandomHandler::class => [
+                Search\StaticSearchClient::class,
+            ],
             Handler\SearchHandler::class => [
                 Search\StaticSearchClient::class,
             ],

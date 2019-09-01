@@ -22,6 +22,7 @@ class IndexHandler implements RequestHandlerInterface
     {
         return new JsonResponse([
             'endpoints' => [
+                'random' => $this->urlHelper->generate('random'),
                 'search' => $this->urlHelper->generate('search', ['term' => '{term}']),
             ],
         ]);

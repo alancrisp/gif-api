@@ -30,9 +30,11 @@ class IndexHandlerTest extends TestCase
 
     public function testProvidesIndex(): void
     {
+        $this->urlHelper->generate('random')->willReturn('/random');
         $this->urlHelper->generate('search', Argument::type('array'))->willReturn('/search/{term}');
         $expected = [
             'endpoints' => [
+                'random' => '/random',
                 'search' => '/search/{term}',
             ],
         ];

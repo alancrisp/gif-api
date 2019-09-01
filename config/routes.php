@@ -22,4 +22,5 @@ use Zend\Expressive\MiddlewareFactory;
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->get('/', App\Handler\IndexHandler::class, 'index');
     $app->get('/search/{term}', App\Handler\SearchHandler::class, 'search');
+    $app->get('/random', App\Handler\RandomHandler::class, 'random');
 };
