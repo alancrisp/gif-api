@@ -30,6 +30,7 @@
     },
     "require-dev": {
         "filp/whoops": "^2.1.12",
+        "phpstan/phpstan": "^0.11.15",
         "phpunit/phpunit": "^7.0.1",
         "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "^2.9.1",
@@ -56,12 +57,14 @@
         "expressive": "expressive --ansi",
         "check": [
             "@cs-check",
+            "@stan",
             "@test"
         ],
         "clear-config-cache": "php bin/clear-config-cache.php",
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "serve": "php -S 0.0.0.0:8080 -t public/",
+        "stan": "phpstan analyse -l max src/",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     }
