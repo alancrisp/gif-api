@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Search;
 
+use App\Assert\Assertion;
 use Exception;
 
 class StaticSearchClient implements SearchClient
@@ -19,6 +20,9 @@ class StaticSearchClient implements SearchClient
 
     public function __construct(string $baseUrl, array $gifs)
     {
+        Assertion::notBlank($baseUrl);
+        Assertion::notEmpty($gifs);
+
         $this->baseUrl = $baseUrl;
         $this->gifs = $gifs;
     }
