@@ -4,41 +4,41 @@ declare(strict_types=1);
 namespace AppTest\Search;
 
 use App\Assert\Assertion;
-use App\Search\SearchResult;
+use App\Search\ResultRecord;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
-class SearchResultTest extends TestCase
+class ResultRecordTest extends TestCase
 {
     public function testValidatesTitle(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionCode(Assertion::VALUE_EMPTY);
-        $this->createSearchResult('');
+        $this->createRecord('');
     }
 
     public function testValidatesUrl(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionCode(Assertion::INVALID_URL);
-        $this->createSearchResult('title', 'not a url');
+        $this->createRecord('title', 'not a url');
     }
 
     public function testProvidesTitle(): void
     {
-        $result = $this->createSearchResult('Grumpy Cat');
+        $result = $this->createRecord('Grumpy Cat');
         $this->assertEquals('Grumpy Cat', $result->getTitle());
     }
 
     public function testProvidesUrl(): void
     {
-        $result = $this->createSearchResult('title', 'https://img.allthegifs.com/grumpycat.gif');
+        $result = $this->createRecord('title', 'https://img.allthegifs.com/grumpycat.gif');
         $this->assertEquals('https://img.allthegifs.com/grumpycat.gif', $result->getUrl());
     }
 
-    private function createSearchResult(string $title, ?string $url = null): SearchResult
+    private function createRecord(string $title, ?string $url = null): ResultRecord
     {
         $url = $url ?? 'https://img.allthegifs.com/grumpycat.gif';
-        return new SearchResult($title, $url);
+        return new ResultRecord($title, $url);
     }
 }

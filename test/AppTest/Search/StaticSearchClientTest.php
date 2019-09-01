@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace AppTest\Search;
 
 use App\Assert\Assertion;
-use App\Search\SearchResult;
+use App\Search\ResultCollection;
+use App\Search\ResultRecord;
 use App\Search\StaticSearchClient;
 use Exception;
 use InvalidArgumentException;
@@ -46,27 +47,26 @@ class StaticSearchClientTest extends TestCase
         ];
     }
 
-    public function testThrowsExceptionWhenNoSearchResult(): void
+    public function testReturnsEmptyCollectionWhenNoResults(): void
     {
         $client = $this->createClient();
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('No result found matching search term \'cool dog\'');
-        $client->search('cool dog');
+        $result = $client->search('cool dog');
+        $expected = new ResultCollection();
+        $this->assertEquals($expected, $result);
     }
 
     public function testSearchesGifs(): void
     {
         $client = $this->createClient();
         $result = $client->search('keyboard');
-        $expected = new SearchResult('Keyboard Cat', 'https://gifs.com/keyboardcat.gif');
-        $this->assertEquals($expected, $result);
+        $this->assertCount(1, $result);
     }
 
     public function testPicksRandomGif(): void
     {
         $client = $this->createClient();
         $result = $client->random();
-        $this->assertInstanceOf(SearchResult::class, $result);
+        $this->assertInstanceOf(ResultRecord::class, $result);
     }
 
     private function createClient(string $baseUrl = 'gifs.com', ?array $gifs = null): StaticSearchClient

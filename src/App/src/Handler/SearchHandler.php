@@ -30,12 +30,17 @@ class SearchHandler implements RequestHandlerInterface
         }
 
         $result = $this->searchClient->search($searchTerm);
+        $records = [];
+        foreach ($result->getRecords() as $record) {
+            $records[] = [
+                'title' => $record->getTitle(),
+                'url' => $record->getUrl(),
+            ];
+        }
 
         return new JsonResponse([
-            'result' => [
-                'title' => $result->getTitle(),
-                'url' => $result->getUrl(),
-            ],
+            'count' => count($result),
+            'records' => $records,
         ]);
     }
 }

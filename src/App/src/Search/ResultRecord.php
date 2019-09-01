@@ -5,7 +5,7 @@ namespace App\Search;
 
 use App\Assert\Assertion;
 
-class SearchResult
+class ResultRecord
 {
     private $title;
     private $url;

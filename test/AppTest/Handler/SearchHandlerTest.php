@@ -4,8 +4,9 @@ declare(strict_types=1);
 namespace AppTest\Handler;
 
 use App\Handler\SearchHandler;
+use App\Search\ResultCollection;
+use App\Search\ResultRecord;
 use App\Search\SearchClient;
-use App\Search\SearchResult;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
@@ -32,12 +33,16 @@ class SearchHandlerTest extends TestCase
 
     public function testProvidesResult(): void
     {
-        $searchResult = new SearchResult('Grumpy Cat', 'https://gifs.com/grumpycat.gif');
-        $this->searchClient->search('grumpy')->willReturn($searchResult);
+        $record = new ResultRecord('Grumpy Cat', 'https://gifs.com/grumpycat.gif');
+        $result = new ResultCollection([$record]);
+        $this->searchClient->search('grumpy')->willReturn($result);
         $expected = [
-            'result' => [
-                'title' => 'Grumpy Cat',
-                'url' => 'https://gifs.com/grumpycat.gif',
+            'count' => 1,
+            'records' => [
+                [
+                    'title' => 'Grumpy Cat',
+                    'url' => 'https://gifs.com/grumpycat.gif',
+                ],
             ],
         ];
 

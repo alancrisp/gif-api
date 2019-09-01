@@ -29,26 +29,29 @@ class StaticSearchClient implements SearchClient
         $this->gifs = $gifs;
     }
 
-    public function search(string $query): SearchResult
+    public function search(string $query): ResultCollection
     {
         // Normalise search term
         $term = strtolower($query);
         if (!isset($this->gifs[$term])) {
-            throw new Exception(sprintf('No result found matching search term \'%s\'', $query));
+            return new ResultCollection([]);
         }
 
         $result = $this->gifs[$term];
+        $records = [
+            new ResultRecord($result['title'], $this->buildUrl($result['file'])),
+        ];
 
-        return new SearchResult($result['title'], $this->buildUrl($result['file']));
+        return new ResultCollection($records);
     }
 
-    public function random(): SearchResult
+    public function random(): ResultRecord
     {
         $random = rand(1, count($this->gifs));
         $key = array_keys($this->gifs)[$random - 1];
         $result = $this->gifs[$key];
 
-        return new SearchResult($result['title'], $this->buildUrl($result['file']));
+        return new ResultRecord($result['title'], $this->buildUrl($result['file']));
     }
 
     private function buildUrl(string $file): string

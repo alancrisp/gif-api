@@ -5,7 +5,7 @@ namespace App\Search;
 
 interface SearchClient
 {
-    public function search(string $query): SearchResult;
+    public function search(string $query): ResultCollection;
 
-    public function random(): SearchResult;
+    public function random(): ResultRecord;
 }
