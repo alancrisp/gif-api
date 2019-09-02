@@ -25,6 +25,13 @@ An easy way to query the API from a linux host is to use `curl`.
 
 A small number of gifs have been included for your viewing pleasure.
 
+## Development Mode
+
+Application configuration is cached by default to the `data/cache/` directory unless development mode is enabled. To clear the cache, run the `composer clear-config-cache` command or run the script `php bin/clear-config-cache.php` directly.
+
+The application assumes development mode by default. This means caching is disabled by default and the Whoops error handler is also used.
+
 ## Tests
 
 Unit tests may be executed with the `composer test` command.
+
