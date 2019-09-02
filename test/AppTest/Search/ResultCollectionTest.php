@@ -32,8 +32,8 @@ class ResultCollectionTest extends TestCase
 
     public function testProvidesRecords(): void
     {
-        $record1 = new ResultRecord('Grumpy Cat', 'https://allthegifs.com/grumpycat.gif');
-        $record2 = new ResultRecord('Keyboard Cat', 'https://allthegifs.com/keyboardcat.gif');
+        $record1 = new ResultRecord('Grumpy Cat', 'https://gifs.com/grumpycat.gif');
+        $record2 = new ResultRecord('Keyboard Cat', 'https://gifs.com/keyboardcat.gif');
         $records = [$record1, $record2];
         $collection = $this->createCollection($records);
         $this->assertEquals($records, $collection->getRecords());

@@ -32,7 +32,7 @@ class StaticSearchClientFactoryTest extends TestCase
     {
         $this->container->get('config')->willReturn([
             'urls' => [
-                'base' => 'img.allthegifs.com',
+                'base' => 'gifs.com',
             ],
         ]);
         $factory = $this->factory;

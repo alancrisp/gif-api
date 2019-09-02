@@ -32,13 +32,13 @@ class ResultRecordTest extends TestCase
 
     public function testProvidesUrl(): void
     {
-        $result = $this->createRecord('title', 'https://img.allthegifs.com/grumpycat.gif');
-        $this->assertEquals('https://img.allthegifs.com/grumpycat.gif', $result->getUrl());
+        $result = $this->createRecord('title', 'https://gifs.com/grumpycat.gif');
+        $this->assertEquals('https://gifs.com/grumpycat.gif', $result->getUrl());
     }
 
     private function createRecord(string $title, ?string $url = null): ResultRecord
     {
-        $url = $url ?? 'https://img.allthegifs.com/grumpycat.gif';
+        $url = $url ?? 'https://gifs.com/grumpycat.gif';
         return new ResultRecord($title, $url);
     }
 }
