@@ -3,6 +3,8 @@ An example API using Zend Expressive.
 
 ## Setup
 
+Start by installing the dependencies by running `composer install`.
+
 The simplest way to run the application is to use the built-in web server in PHP. You can do so with the included `composer serve` command.
 
 By default the application attempts to run on port 8080 which must be available and not in use on your host machine. To run on a different port either update the `serve` command in `composer.json` to specify a different port or start the PHP web server manually with `php -S localhost:8080 -t public`, replacing port 8080 with the port of your choice.
@@ -29,7 +31,8 @@ A small number of gifs have been included for your viewing pleasure.
 
 Application configuration is cached by default to the `data/cache/` directory unless development mode is enabled. To clear the cache, run the `composer clear-config-cache` command or run the script `php bin/clear-config-cache.php` directly.
 
-The application assumes development mode by default. This means caching is disabled by default and the Whoops error handler is also used.
+To run the application in development mode, use the `composer development-enable` command. This will disable config caching and enable the Whoops error handler.
+To disable development mode, use the `composer development-disable` command.
 
 ## Tests
 
