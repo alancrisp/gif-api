@@ -24,3 +24,7 @@ An easy way to query the API from a linux host is to use `curl`.
 - The `/search/{term}` endpoint can be used to search for gifs with a particular search term. For the purpose of this demonstration there are five available hard coded search terms which will provide results. These are `ceiling`, `grumpy`, `keyboard`, `nyan` and `takeoff`.
 
 A small number of gifs have been included for your viewing pleasure.
+
+## Tests
+
+Unit tests may be executed with the `composer test` command.
