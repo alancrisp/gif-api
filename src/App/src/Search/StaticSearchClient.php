@@ -56,6 +56,6 @@ class StaticSearchClient implements SearchClient
 
     private function buildUrl(string $file): string
     {
-        return sprintf('https://%s/%s', $this->baseUrl, $file);
+        return sprintf('http://%s/%s', $this->baseUrl, $file);
     }
 }
