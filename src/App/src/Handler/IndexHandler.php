@@ -11,6 +11,9 @@ use Zend\Expressive\Helper\UrlHelper;
 
 class IndexHandler implements RequestHandlerInterface
 {
+    /**
+     * @var UrlHelper
+     */
     private $urlHelper;
 
     public function __construct(UrlHelper $urlHelper)

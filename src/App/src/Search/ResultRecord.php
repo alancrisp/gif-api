@@ -7,7 +7,14 @@ use App\Assert\Assertion;
 
 class ResultRecord
 {
+    /**
+     * @var string
+     */
     private $title;
+
+    /**
+     * @var string
+     */
     private $url;
 
     public function __construct(string $title, string $url)
