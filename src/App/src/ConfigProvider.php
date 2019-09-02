@@ -20,6 +20,11 @@ class ConfigProvider
     private function getDependencies(): array
     {
         return [
+            'aliases' => [
+                // Sets the static search client as default for the purpose of the demo
+                // Can be overridden in a *.local.php config file as necessary
+                Search\SearchClient::class => Search\StaticSearchClient::class,
+            ],
             'factories' => [
                 Middleware\ApiKeyMiddleware::class => InvokableFactory::class,
                 Search\StaticSearchClient::class => Search\StaticSearchClientFactory::class,
@@ -34,10 +39,10 @@ class ConfigProvider
                 UrlHelper::class,
             ],
             Handler\RandomHandler::class => [
-                Search\StaticSearchClient::class,
+                Search\SearchClient::class,
             ],
             Handler\SearchHandler::class => [
-                Search\StaticSearchClient::class,
+                Search\SearchClient::class,
             ],
         ];
     }
