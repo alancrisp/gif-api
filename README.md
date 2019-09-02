@@ -17,7 +17,7 @@ The API requires a key to be specified as an HTTP header called `API_KEY`. For t
 
 An easy way to query the API from a linux host is to use `curl`.
 
-`curl -i -H"API_KEY: SHOWMEGIFS" localhost:8080/`
+`curl -H"API_KEY: SHOWMEGIFS" localhost:8080/`
 
 - The `/` route will return a list of the available endpoints within the API.
 - The `/random` endpoint will return a gif at random.
