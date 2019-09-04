@@ -10,5 +10,8 @@ use Assert\Assertion as BaseAssertion;
  */
 class Assertion extends BaseAssertion
 {
+    /**
+     * @var string
+     */
     protected static $exceptionClass = 'Assert\InvalidArgumentException';
 }

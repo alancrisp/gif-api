@@ -11,6 +11,9 @@ use Zend\Diactoros\Response\JsonResponse;
 
 class RandomHandler implements RequestHandlerInterface
 {
+    /**
+     * @var SearchClient
+     */
     private $searchClient;
 
     public function __construct(SearchClient $searchClient)
