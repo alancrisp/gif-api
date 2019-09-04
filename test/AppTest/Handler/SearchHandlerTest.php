@@ -7,7 +7,6 @@ use App\Handler\SearchHandler;
 use App\Search\ResultCollection;
 use App\Search\ResultRecord;
 use App\Search\SearchClient;
-use Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
@@ -23,12 +22,13 @@ class SearchHandlerTest extends TestCase
         $this->handler = new SearchHandler($this->searchClient->reveal());
     }
 
-    public function testThrowsExceptionOnMissingSearchTerm(): void
+    public function testReturnsErrorOnMissingSearchTerm(): void
     {
         $request = $this->prophesize(ServerRequestInterface::class);
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('No search term provided');
-        $this->handler->handle($request->reveal());
+        $response = $this->handler->handle($request->reveal());
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertEquals(400, $response->getStatusCode());
+        $this->assertEquals(['error' => 'No search term provided'], $response->getPayload());
     }
 
     public function testProvidesResult(): void

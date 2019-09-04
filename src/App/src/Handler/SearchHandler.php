@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Handler;
 
 use App\Search\SearchClient;
-use Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -26,7 +25,7 @@ class SearchHandler implements RequestHandlerInterface
     {
         $searchTerm = $request->getAttribute('term');
         if (null === $searchTerm) {
-            throw new Exception('No search term provided');
+            return new JsonResponse(['error' => 'No search term provided'], 400);
         }
 
         $result = $this->searchClient->search($searchTerm);
